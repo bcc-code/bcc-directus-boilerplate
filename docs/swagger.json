@@ -1,0 +1,86 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"TodoItemDto": {
+				"properties": {
+					"is_done": {
+						"type": "boolean"
+					},
+					"text": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"is_done",
+					"text",
+					"id"
+				],
+				"type": "object"
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "directus-app-boilerplate",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/todo_items/list/{listId}": {
+			"get": {
+				"operationId": "GetAllItemsFromList",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/TodoItemDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "listId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"examples": {
+							"Example 1": {
+								"value": "52907745-7672-470e-a803-a2f8feb52944"
+							},
+							"Example 2": {
+								"value": "e77ef155-bd12-46f0-8559-bf55f6dd4c63"
+							}
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

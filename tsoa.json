@@ -1,0 +1,18 @@
+{
+  "entryFile": "node_modules/directus/dist/start.js",
+  "basePath": "src/",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": [
+    "src/**/*Controller.ts"
+  ],
+  "spec": {
+    "outputDirectory": "docs",
+    "specVersion": 3
+  },
+  "routes": {
+    "routesDir": "docs"
+  },
+  "ignore": [
+    "**/node_modules/**"
+  ]
+}

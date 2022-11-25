@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "ignore": [],
+    "ext": "ts,json,js,css",
+    "watch": ["/home/node/app/src/**/*.*", "/home/node/app/extensions/**/*.*"],
+    "execMap": {
+      "ts": "node --inspect=0.0.0.0:9229 --nolazy -r ts-node/register"
+    }
+  }
