@@ -8,7 +8,7 @@
     "init": "sh local_init.sh",
     "build": "tsc",
     "dev": "tsc --watch --sourceMap true",
-    "seed": "rm -rf database/seeds/dist && tsc --project database/seeds/tsconfig.json && knex seed:run --esm --env development",
+    "seed": "rimraf database/seeds/dist && tsc --project database/seeds/tsconfig.json && knex seed:run --esm --env development",
     "dk-init": "docker exec -it directus-app /bin/bash /home/node/app/local_init.sh",
     "dk-snapshot": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema snapshot ./schema.yaml --yes\"",
     "dk-apply": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema apply ./schema.yaml --yes\""
@@ -30,6 +30,7 @@
     "tsoa": "^4.1.3"
   },
   "peerDependencies": {
-    "knex": "^2.3.0"
+    "knex": "^2.3.0",
+    "rimraf": "3.0.2"
   }
 }
