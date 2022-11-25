@@ -1,0 +1,64 @@
+version: "3.4"
+
+services:
+  directus-app:
+    image: directus-app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: base
+    volumes:
+      - ./src:/home/node/app/src
+      - ./extensions:/home/node/app/extensions
+
+      - ./.env:/home/node/app/.env
+      - ./nodemon.json:/home/node/app/nodemon.json
+      - ./schema.yaml:/home/node/app/schema.yaml
+
+      - ./local_init.sh:/home/node/app/local_init.sh
+      - ./run_nodemon.sh:/home/node/app/run_nodemon.sh
+      - ./wait-for-it.sh:/home/node/app/wait-for-it.sh
+    environment:
+      NODE_ENV: development
+    networks:
+      - directus
+    container_name: directus-app
+    depends_on:
+      - "postgres-db"
+    ports:
+      - "8080:8080"
+      - "9229:9229"
+    command:
+      - /bin/sh
+      - -c
+      - |
+        ./wait-for-it.sh postgres-db:5432 -- "./run_nodemon.sh"
+
+  postgres-db:
+    container_name: postgres-db
+    image: postgis/postgis:13-master
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+    networks:
+      - directus
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: 'postgres-admin'
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_DB: 'directus-app'
+
+  pgadmin:
+    container_name: pg-admin
+    image: dpage/pgadmin4
+    restart: always
+    networks:
+      - directus
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
+networks:
+  directus:

@@ -1,0 +1,26 @@
+{
+  "name": "bcc-directus-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "docker exec -it directus-app /bin/bash /home/node/app/local_init.sh",
+    "build": "tsc",
+    "schema-snapshot": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema snapshot ./schema.yaml --yes\"",
+    "schema-apply": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema apply ./schema.yaml --yes\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.9",
+    "tscpaths": "^0.0.9",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "directus": "9.20.4",
+    "nodemon": "^2.0.20",
+    "pg": "^8.8.0",
+    "tsoa": "^4.1.3"
+  }
+}

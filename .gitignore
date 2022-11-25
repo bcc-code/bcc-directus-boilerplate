@@ -1,0 +1,11 @@
+# Dependency directories
+node_modules/
+
+# dotenv environment variables file
+.env
+
+#IntelliJ IDEA
+.idea/
+
+#PostgreSQL local files
+data/
