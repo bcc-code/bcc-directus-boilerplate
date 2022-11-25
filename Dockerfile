@@ -8,5 +8,5 @@ RUN npm i
 COPY . .
 
 FROM base as production
-ENV NODE_PATH=./build
-CMD ["npm", "run", "watch"]
+ENV NODE_PATH=./
+CMD ["directus", "start"]

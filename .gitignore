@@ -9,3 +9,16 @@ node_modules/
 
 #PostgreSQL local files
 data/
+
+# SQLite local files
+*.db
+
+#osx
+.DS_Store
+
+# Don't want maps in production
+extensions/**/*.js.map
+extensions/**/*.d.ts
+
+# Don't need built seed files
+database/seeds/dist

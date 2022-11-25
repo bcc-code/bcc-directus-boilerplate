@@ -2,14 +2,16 @@
 
 A boilerplate for using Directus with best practices inside BCC.
 
-## Setup locally
+## Setup locally (useing docker)
 
 1. Clone the repo
 2. Create `.env` file. You can copy example by `cp env.example .env`
 3. Install dependencies by `npm install`
 4. Run services by `docker compose up -d`
-5. When you run application for the first time, run `npm run init`. 
+5. When you run application for the first time, run `npm run dk-init`. 
 6. After this action, it may be necessary to restart the container with the application, you can use `docker restart directus-app`
+
+Initial admin user is: `admin@example.com | admin`
 
 ## Documentation
 
@@ -30,3 +32,12 @@ To generate `docs/swagger.json` run `tsoa spec`.
 #### Important
 
 There is a problem with `@Query` annotation when query is an object. In that case just use `@Inject`, but your query will not be in the documentation.
+
+
+### Seeding data to database
+
+Command: `npm run seed`
+
+Look at example under `database/seeds/src/index.ts`.
+
+Using knex to seed database.
