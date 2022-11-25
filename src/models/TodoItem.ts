@@ -1,4 +1,4 @@
-import {Item} from "./types";
+import {Item} from "../types";
 
 export interface TodoItem extends Item {
     id: string;

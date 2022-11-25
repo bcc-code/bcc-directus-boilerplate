@@ -40,7 +40,7 @@
 	"paths": {
 		"/todo_items/list/{listId}": {
 			"get": {
-				"operationId": "GetAllItemsFromList",
+				"operationId": "GetTodoItemsForList",
 				"responses": {
 					"200": {
 						"description": "Ok",

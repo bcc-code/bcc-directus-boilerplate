@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TodoItemsService = void 0;
 const directus_1 = require("directus");
-const TodoItemDto_1 = require("../dtos/TodoItemDto");
 class TodoItemsService extends directus_1.ItemsService {
     constructor(asAdmin, context) {
         var _a;
@@ -13,17 +12,6 @@ class TodoItemsService extends directus_1.ItemsService {
                 admin: asAdmin || ((_a = context.accountability) === null || _a === void 0 ? void 0 : _a.admin)
             }
         });
-    }
-    async getAllItemsFromList(listId) {
-        const todoItems = await super.readByQuery({
-            filter: {
-                list_id: {
-                    _eq: listId
-                }
-            },
-            fields: TodoItemDto_1.DbTodoItemFields
-        });
-        return todoItems;
     }
     async updateMany(keys, data, opts) {
         var _a;

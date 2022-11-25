@@ -15,21 +15,29 @@ const TodoItemDto_1 = require("../../dtos/TodoItemDto");
 let TodoItemsController = class TodoItemsController extends tsoa_1.Controller {
     constructor(todoItemsService) {
         super();
-        this._todoItemsService = todoItemsService;
+        this.todoItemsService = todoItemsService;
     }
     /**
      * @example listId "52907745-7672-470e-a803-a2f8feb52944"
      * @example listId "e77ef155-bd12-46f0-8559-bf55f6dd4c63"
      */
-    async getAllItemsFromList(listId) {
-        const todoItems = await this._todoItemsService.getAllItemsFromList(listId);
+    async getTodoItemsForList(listId, query) {
+        const todoItems = await this.todoItemsService.readByQuery(Object.assign({}, query, {
+            filter: Object.assign({}, query.filter, {
+                list_id: {
+                    _eq: listId
+                }
+            }),
+            fields: [...query.fields, ...TodoItemDto_1.DbTodoItemFields],
+        }));
         return todoItems.map(TodoItemDto_1.toTodoItemDto);
     }
 };
 __decorate([
     (0, tsoa_1.Get)("/list/{listId}"),
-    __param(0, (0, tsoa_1.Path)())
-], TodoItemsController.prototype, "getAllItemsFromList", null);
+    __param(0, (0, tsoa_1.Path)()),
+    __param(1, (0, tsoa_1.Inject)())
+], TodoItemsController.prototype, "getTodoItemsForList", null);
 TodoItemsController = __decorate([
     (0, tsoa_1.Route)("todo_items")
 ], TodoItemsController);

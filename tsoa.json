@@ -12,7 +12,6 @@
   "routes": {
     "routesDir": "docs"
   },
-  "ignore": [
-    "**/node_modules/**"
-  ]
+
+  "ignore": []
 }
