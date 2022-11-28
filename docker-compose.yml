@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.8"
 
 services:
   directus-app:
@@ -12,19 +12,15 @@ services:
       - ./extensions:/home/node/app/extensions
 
       - ./.env:/home/node/app/.env
-      - ./nodemon.json:/home/node/app/nodemon.json
       - ./schema.yaml:/home/node/app/schema.yaml
-
-      - ./local_init.sh:/home/node/app/local_init.sh
-      - ./run_nodemon.sh:/home/node/app/run_nodemon.sh
-      - ./wait-for-it.sh:/home/node/app/wait-for-it.sh
     environment:
       NODE_ENV: development
     networks:
       - directus
     container_name: directus-app
     depends_on:
-      - "postgres-db"
+      postgres-db:
+        condition: service_healthy
     ports:
       - "8080:8080"
       - "9229:9229"
@@ -32,7 +28,7 @@ services:
       - /bin/sh
       - -c
       - |
-        ./wait-for-it.sh postgres-db:5432 -- "./run_nodemon.sh"
+        ./run_nodemon.sh
 
   postgres-db:
     container_name: postgres-db
@@ -41,12 +37,19 @@ services:
       - ./data/database:/var/lib/postgresql/data
     networks:
       - directus
+    expose:
+      - "5432"
     ports:
-      - "5432:5432"
+      - "5432:15432"
     environment:
       POSTGRES_USER: 'postgres-admin'
       POSTGRES_PASSWORD: 'password'
       POSTGRES_DB: 'directus-app'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     container_name: pg-admin

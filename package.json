@@ -9,7 +9,7 @@
     "build": "tsc",
     "dev": "tsc --watch --sourceMap true",
     "seed": "rimraf database/seeds/dist && tsc --project database/seeds/tsconfig.json && knex seed:run --esm --env development",
-    "dk-init": "docker exec -it directus-app /bin/bash /home/node/app/local_init.sh",
+    "dk-init": "docker exec -it directus-app /bin/bash /home/node/app/local_init.sh && docker restart directus-app",
     "dk-snapshot": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema snapshot ./schema.yaml --yes\"",
     "dk-apply": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema apply ./schema.yaml --yes\""
   },
