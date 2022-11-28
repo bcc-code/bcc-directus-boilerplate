@@ -36,7 +36,7 @@ services:
     expose:
       - "5432"
     ports:
-      - "5432:15432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: 'postgres-admin'
       POSTGRES_PASSWORD: 'password'
