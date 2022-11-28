@@ -152,7 +152,8 @@ exports.exportPermissions = exportPermissions;
 // ROLES
 //
 async function importRoles(rolesService) {
-    if (!fs_extra_1.default.pathExists(rolesFile)) {
+    console.log('Importing Roles');
+    if (!await fs_extra_1.default.pathExists(rolesFile)) {
         return void 0;
     }
     const yamlInput = await fs_extra_1.default.readFile(rolesFile, 'utf8');
@@ -175,6 +176,7 @@ async function importRoles(rolesService) {
 }
 exports.importRoles = importRoles;
 async function exportRoles(rolesService) {
+    console.log('Exporting Roles');
     const rows = await rolesService.readByQuery({
         limit: -1,
         fields: ['id', 'name', 'icon', 'description', 'enforce_tfa', 'external_id', 'ip_whitelist', 'app_access', 'admin_access'],

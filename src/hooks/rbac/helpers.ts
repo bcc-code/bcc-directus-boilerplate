@@ -166,7 +166,8 @@ export async function exportPermissions(collection: string, permissionsService: 
 //
 
 export async function importRoles(rolesService: PermissionsService) {
-    if (! fse.pathExists(rolesFile)) {
+    console.log('Importing Roles')
+    if (! await fse.pathExists(rolesFile)) {
         return void 0;
     }
 
@@ -193,6 +194,7 @@ export async function importRoles(rolesService: PermissionsService) {
 }
 
 export async function exportRoles(rolesService: PermissionsService) {
+    console.log('Exporting Roles')
     const rows = await rolesService.readByQuery({
         limit: -1,
         fields: ['id', 'name', 'icon', 'description', 'enforce_tfa', 'external_id', 'ip_whitelist', 'app_access', 'admin_access'],
@@ -224,7 +226,7 @@ export async function exportRoles(rolesService: PermissionsService) {
     if (! yamlOutput.startsWith('[]')) {
         yamlOutput = yamlOutput.replaceAll('- id', '\n- id')
 
-        await fse.writeFile(rolesFile, yamlOutput, 'utf8');
+        await fse.writeFile(rolesFile, yamlOutput, 'utf8')
     } else {
         await fse.remove(rolesFile)
     }

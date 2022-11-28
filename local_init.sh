@@ -18,7 +18,7 @@
 #
 #create_user() {
 #  echo '=== creating new admin user ==='
-#
+## UPDATE THE FOLLOWING WITH ROLE ID FOR ADMINISTRATOR AS FOUND IN config/roles.yaml
 #  role="7f2ff228-0a9b-41ad-b057-5b784109c97a"
 #  echo 'Enter email'
 #  read email
@@ -43,16 +43,16 @@ mv ./extensions/migrations-lock ./extensions/migrations
 echo '=== applying custom migrations ==='
 npx directus database migrate:latest
 
-#echo '=== asking for rbac rules import ==='
-#while true; do
-#  read -p "Do you have rbac rules to import? [y/n]? " yn
-#  case $yn in
-#  [Yy]*)
-#    npx directus rbac import
+echo '=== asking for rbac rules import ==='
+while true; do
+  read -p "Do you have rbac rules to import? [y/n]? " yn
+  case $yn in
+  [Yy]*)
+    npx directus rbac import
 #    ask_for_user
-#    break
-#    ;;
-#  [Nn]*) exit ;;
-#  *) echo "Please answer Y or N." ;;
-#  esac
-#done
+    break
+    ;;
+  [Nn]*) exit ;;
+  *) echo "Please answer Y or N." ;;
+  esac
+done

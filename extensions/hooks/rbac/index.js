@@ -49,13 +49,13 @@ const registerHook = (({ action, filter, init }, extCtx) => {
         const permissionsService = new PermissionsService({ database, schema });
         const rolesService = new RolesService({ database, schema });
         // Sync roles into db
-        logger.info('Importing roles...');
+        console.log('Importing roles...');
         await (0, helpers_1.importRoles)(rolesService);
         // Sync permissions into db
-        logger.info('Importing permissions...');
+        console.log('Importing permissions...');
         const collections = await (0, helpers_1.listConfiguredCollections)();
         await Promise.all(collections.map(collection => (0, helpers_1.importPermissions)(collection, permissionsService)));
-        logger.info('RBAC imported!');
+        console.log('RBAC imported!');
     }
     if (['EXPORT', 'FULL'].includes(env.RBAC_SYNC_MODE)) {
         action('roles.create', onRoleChanges);
@@ -94,23 +94,23 @@ const registerHook = (({ action, filter, init }, extCtx) => {
             .option('--system', 'Include system collections')
             .action(async ({ system = false }) => {
             const { getSchema, database } = extCtx;
-            logger.info('Exporting RBAC...');
+            console.log('Exporting RBAC...');
             try {
                 const schema = await getSchema();
                 const collectionsService = new CollectionsService({ database, schema });
                 const permissionsService = new PermissionsService({ database, schema });
                 const rolesService = new RolesService({ database, schema });
                 const collections = await collectionsService.readByQuery();
-                logger.info('Exporting permissions...');
+                console.log('Exporting permissions...');
                 await Promise.all(collections.map(({ collection }) => {
                     if (!system && collection.startsWith('directus_')) {
                         return void 0;
                     }
                     return (0, helpers_1.exportPermissions)(collection, permissionsService);
                 }));
-                logger.info('Exporting roles...');
+                console.log('Exporting roles...');
                 await (0, helpers_1.exportRoles)(rolesService);
-                logger.info('RBAC exported!');
+                console.log('RBAC exported!');
                 process.exit(0);
             }
             catch (err) {

@@ -79,11 +79,11 @@ const registerHook: HookConfig = (({ action, filter, init }, extCtx) => {
         const rolesService = new RolesService({database, schema});
 
         // Sync roles into db
-        logger.info('Importing roles...')
+        console.log('Importing roles...')
         await importRoles(rolesService)
 
         // Sync permissions into db
-        logger.info('Importing permissions...');
+        console.log('Importing permissions...');
 
         const collections = await listConfiguredCollections()
 
@@ -91,7 +91,7 @@ const registerHook: HookConfig = (({ action, filter, init }, extCtx) => {
             importPermissions(collection, permissionsService)
         ))
 
-        logger.info('RBAC imported!')
+        console.log('RBAC imported!')
     }
 
     if (['EXPORT', 'FULL'].includes(env.RBAC_SYNC_MODE)) {
@@ -136,7 +136,7 @@ const registerHook: HookConfig = (({ action, filter, init }, extCtx) => {
             .action(async ({system = false}) => {
 				const { getSchema, database } = extCtx;
 
-                logger.info('Exporting RBAC...')
+                console.log('Exporting RBAC...')
                 try {
                     const schema = await getSchema()
                     const collectionsService = new CollectionsService({database, schema});
@@ -145,7 +145,7 @@ const registerHook: HookConfig = (({ action, filter, init }, extCtx) => {
 
                     const collections: Collection[] = await collectionsService.readByQuery()
 
-                    logger.info('Exporting permissions...');
+                    console.log('Exporting permissions...');
                     await Promise.all(collections.map(({collection}) => {
                         if (!system && collection.startsWith('directus_')) {
                             return void 0;
@@ -154,10 +154,10 @@ const registerHook: HookConfig = (({ action, filter, init }, extCtx) => {
                         return exportPermissions(collection, permissionsService)
                     }))
 
-                    logger.info('Exporting roles...');
+                    console.log('Exporting roles...');
                     await exportRoles(rolesService)
 
-                    logger.info('RBAC exported!')
+                    console.log('RBAC exported!')
                     process.exit(0);
                 } catch (err: any) {
                     logger.error(err);
