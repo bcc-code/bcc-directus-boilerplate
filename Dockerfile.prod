@@ -1,0 +1,16 @@
+FROM node as base
+
+WORKDIR /home/node/app
+COPY package*.json ./
+
+RUN npm i
+
+COPY src ./
+COPY extensions ./
+COPY tsconfig.json ./
+
+CMD npm run build
+
+FROM base as production
+ENV NODE_PATH=./
+CMD npx nodemon node_modules/directus/dist/start.js
