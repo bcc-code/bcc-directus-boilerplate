@@ -1,0 +1,11 @@
+# Don't want maps in production
+**/*.js.map
+**/*.d.ts
+
+# Exclude root js from repo (built from src)
+/*.js
+
+# Should be built from src
+endpoints
+hooks
+services

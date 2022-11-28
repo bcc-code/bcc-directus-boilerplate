@@ -1,4 +1,4 @@
-import {TodoItem} from "../models/TodoItem";
+import {TodoItem} from "../types";
 
 export const DbTodoItemFields = ["id", "text", "is_done", "list_id", "user_created", "date_created"]
 

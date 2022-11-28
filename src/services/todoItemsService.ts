@@ -1,7 +1,7 @@
 import {PrimaryKey} from "@directus/shared/src/types";
 import {AbstractServiceOptions, MutationOptions} from "directus/dist/types";
 import {ItemsService} from "directus";
-import {TodoItem} from "../models/TodoItem";
+import {TodoItem} from "@bcc-directus-boilerplate/shared/types";
 
 export class TodoItemsService extends ItemsService {
 
