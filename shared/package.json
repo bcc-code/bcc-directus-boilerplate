@@ -1,0 +1,32 @@
+{
+	"name": "@bcc-directus-boilerplate/shared",
+	"version": "1.0.0",
+	"description": "Sharable types and utils for BCC Activites",
+	"sideEffects": false,
+	"exports": {
+		"./dtos": {
+			"import": "./dist/esm/dtos/index.js",
+			"require": "./dist/cjs/dtos/index.js"
+		},
+		"./types": {
+			"import": "./dist/esm/types/index.js",
+			"require": "./dist/cjs/types/index.js"
+		},
+		"./utils": {
+			"import": "./dist/esm/utils/index.js",
+			"require": "./dist/cjs/utils/index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist",
+		"!**/*.test.js",
+		"!**/*.d.ts.map"
+	],
+	"scripts": {
+		"build": "npm run build:esm && npm run build:cjs",
+		"build:esm": "tsc --project ./tsconfig.json --module ES2015 --outDir ./dist/esm",
+		"build:cjs": "tsc --project ./tsconfig.json --module CommonJS --outDir ./dist/cjs",
+		"dev": "tsc --watch --project ./tsconfig.json --module ES2015 --outDir ./dist/esm"
+	}
+}

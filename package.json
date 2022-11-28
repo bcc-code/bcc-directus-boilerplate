@@ -8,6 +8,7 @@
     "init": "sh local_init.sh",
     "build": "tsc",
     "dev": "tsc --watch --sourceMap true",
+    "clean": "rimraf extensions/dtos extensions/endpoints extensions/hooks extensions/services extensions/types",
     "seed": "rimraf database/seeds/dist && tsc --project database/seeds/tsconfig.json && knex seed:run --esm --env development",
     "dk-build": "docker exec -it directus-app npm run build",
     "dk-init": "docker exec -it directus-app /bin/bash /home/node/app/local_init.sh && docker restart directus-app",
@@ -26,6 +27,7 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
+    "@bcc-directus-boilerplate/shared": "file:shared",
     "@types/fs-extra": "^9.0.13",
     "directus": "^9.20.4",
     "jwks-rsa": "^3.0.0",

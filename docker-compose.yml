@@ -8,12 +8,6 @@ services:
       dockerfile: ./Dockerfile
       target: base
     volumes:
-      - type: bind
-        source: ./src
-        target: /home/node/app/src
-      - type: bind
-        source: ./extensions
-        target: /home/node/app/extensions
       - ./.env:/home/node/app/.env
       - ./schema.yaml:/home/node/app/schema.yaml
     environment:
@@ -30,8 +24,7 @@ services:
     command:
       - /bin/sh
       - -c
-      - |
-        ./run_nodemon.sh
+      - ./run_nodemon.sh
 
   postgres-db:
     container_name: postgres-db
@@ -43,7 +36,7 @@ services:
     expose:
       - "5432"
     ports:
-      - "5432:15432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: 'postgres-admin'
       POSTGRES_PASSWORD: 'password'
