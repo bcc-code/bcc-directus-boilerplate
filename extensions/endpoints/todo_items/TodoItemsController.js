@@ -19,7 +19,6 @@ let TodoItemsController = class TodoItemsController extends tsoa_1.Controller {
     }
     /**
      * @example listId "52907745-7672-470e-a803-a2f8feb52944"
-     * @example listId "e77ef155-bd12-46f0-8559-bf55f6dd4c63"
      */
     async getTodoItemsForList(listId, query) {
         const todoItems = await this.todoItemsService.readByQuery(Object.assign({}, query, {

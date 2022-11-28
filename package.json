@@ -9,9 +9,11 @@
     "build": "tsc",
     "dev": "tsc --watch --sourceMap true",
     "seed": "rimraf database/seeds/dist && tsc --project database/seeds/tsconfig.json && knex seed:run --esm --env development",
+    "dk-build": "docker exec -it directus-app npm run build",
     "dk-init": "docker exec -it directus-app /bin/bash /home/node/app/local_init.sh && docker restart directus-app",
     "dk-snapshot": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema snapshot ./schema.yaml --yes\"",
-    "dk-apply": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema apply ./schema.yaml --yes\""
+    "dk-apply": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema apply ./schema.yaml --yes\"",
+    "dk-migrate": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus database migrate:latest\""
   },
   "author": "",
   "license": "ISC",
@@ -24,7 +26,9 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "directus": "9.20.4",
+    "@types/fs-extra": "^9.0.13",
+    "directus": "^9.20.4",
+    "jwks-rsa": "^3.0.0",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "tsoa": "^4.1.3"
