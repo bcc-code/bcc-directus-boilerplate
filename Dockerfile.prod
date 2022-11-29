@@ -1,15 +1,13 @@
 FROM node as base
 WORKDIR /home/node/app
 
-COPY package*.json ./
+COPY ./shared ./
+COPY ./src ./
+COPY ./extensions ./
+
+COPY *.json ./
 
 RUN npm i
-
-COPY shared ./
-COPY src ./
-COPY extensions ./
-COPY tsconfig.json ./
-
 
 FROM base as build-shared
 WORKDIR /home/node/app/shared

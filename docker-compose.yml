@@ -8,6 +8,15 @@ services:
       dockerfile: ./Dockerfile
       target: base
     volumes:
+      - type: bind
+        source: ./shared
+        target: /home/node/app/shared
+      - type: bind
+        source: ./src
+        target: /home/node/app/src
+      - type: bind
+        source: ./extensions
+        target: /home/node/app/extensions
       - ./.env:/home/node/app/.env
       - ./schema.yaml:/home/node/app/schema.yaml
     environment:
