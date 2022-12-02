@@ -2,9 +2,9 @@ FROM node as base
 
 WORKDIR /home/node/app
 
-COPY ./shared ./
-COPY ./src ./
-COPY ./extensions ./
+COPY ./shared ./shared
+COPY ./src ./src
+COPY ./extensions ./extensions
 
 COPY *.json ./
 COPY *.sh ./
