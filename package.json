@@ -8,6 +8,7 @@
     "init": "sh local_init.sh",
     "build": "tsc",
     "dev": "tsc --watch --sourceMap true",
+    "postinstall": "tsc --project $(pwd)/shared/tsconfig.json --rootDir $(pwd)/shared/src --module ES2015 --outDir $(pwd)/shared/dist/esm",
     "clean": "rimraf extensions/dtos extensions/endpoints extensions/hooks extensions/services extensions/types",
     "seed": "rimraf database/seeds/dist && tsc --project database/seeds/tsconfig.json && knex seed:run --esm --env development",
     "dk-build": "docker exec -it directus-app npm run build",

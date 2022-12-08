@@ -1,4 +1,4 @@
-FROM node as base
+FROM node:slim as base
 
 WORKDIR /home/node/app
 
