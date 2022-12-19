@@ -1,5 +1,8 @@
-import {PrimaryKey} from "../types";
+import {PrimaryKey} from '../types';
 
-export function primaryKey(objValue: Record<string, any> | PrimaryKey, idField: string = 'id'): PrimaryKey {
-    return String(typeof objValue === 'object' ? objValue[idField] : objValue)
+export function primaryKey(
+  objValue: Record<string, any> | PrimaryKey,
+  idField = 'id'
+): PrimaryKey {
+  return String(typeof objValue === 'object' ? objValue[idField] : objValue);
 }

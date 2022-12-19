@@ -1,3 +1,17 @@
 {
-  "extends": "./node_modules/gts/"
+  "extends": "./node_modules/gts/",
+  "rules": {
+    "node/no-extraneous-require": [
+      "error",
+      {
+        "allowModules": ["dotenv"]
+      }
+    ],
+    "node/no-unpublished-import": [
+      "error",
+      {
+        "allowModules": ["@faker-js/faker"]
+      }
+    ]
+  }
 }
