@@ -15,7 +15,9 @@
     "dk-init": "docker exec -it directus-app /bin/bash /home/node/app/local_init.sh && docker restart directus-app",
     "dk-snapshot": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema snapshot ./schema.yaml --yes\"",
     "dk-apply": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema apply ./schema.yaml --yes\"",
-    "dk-migrate": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus database migrate:latest\""
+    "dk-migrate": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus database migrate:latest\"",
+    "lint": "gts lint",
+    "fix": "gts fix"
   },
   "author": "",
   "license": "ISC",
@@ -25,7 +27,8 @@
     "@types/faker": "^6.6.9",
     "@types/node": "^18.11.9",
     "tscpaths": "^0.0.9",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "gts": "^3.1.1"
   },
   "dependencies": {
     "@bcc-directus-boilerplate/shared": "file:shared",
