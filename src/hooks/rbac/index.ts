@@ -1,3 +1,4 @@
+/* eslint-disable no-process-exit */
 import {
   ActionHandler,
   FilterHandler,

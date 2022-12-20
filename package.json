@@ -8,7 +8,7 @@
     "init": "sh local_init.sh",
     "build": "tsc",
     "dev": "tsc --watch --sourceMap true",
-    "postinstall": "tsc --project $(pwd)/shared/tsconfig.json --rootDir $(pwd)/shared/src --module ES2015 --outDir $(pwd)/shared/dist/esm",
+    "postinstall": "tsc --project ./shared/tsconfig.json --rootDir ./shared/src --module ES2015 --outDir ./shared/dist/esm",
     "clean": "rimraf extensions/dtos extensions/endpoints extensions/hooks extensions/services extensions/types",
     "seed": "rimraf database/seeds/dist && tsc --project database/seeds/tsconfig.json && knex seed:run --esm --env development",
     "dk-build": "docker exec -it directus-app npm run build",
@@ -41,6 +41,12 @@
   },
   "peerDependencies": {
     "knex": "^2.3.0",
-    "rimraf": "3.0.2"
+    "rimraf": "^3.0.2",
+    "dotenv": "^16.0.3",
+    "js-yaml": "^4.1.0",
+    "fs-extra": "^11.1.0",
+    "lodash": "^4.17.21",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1"
   }
 }

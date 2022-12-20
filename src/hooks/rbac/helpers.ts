@@ -254,6 +254,7 @@ export async function exportRoles(rolesService: PermissionsService) {
     // We only want to dump the optional fields if they are not falsy
     Object.entries(optional).forEach(([key, value]) => {
       if (value) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         role[key] = value;
       }
