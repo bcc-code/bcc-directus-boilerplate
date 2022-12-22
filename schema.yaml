@@ -1,5 +1,5 @@
 version: 1
-directus: 9.20.4
+directus: 9.22.1
 collections:
   - collection: todo_items
     meta:
