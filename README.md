@@ -41,3 +41,11 @@ Command: `npm run seed`
 Look at example under `database/seeds/src/index.ts`.
 
 Using knex to seed database.
+
+### RBAC sync
+
+In the `.env` file, set the RBAC synchronization mode before database initialization to: `RBAC_SYNC_MODE=EXPORT`
+
+If the database is already initialized, you can set it to: `RBAC_SYNC_MODE=FULL`
+
+Otherwise, you may run into problems initializing the app.
