@@ -1,4 +1,15 @@
-export type {Item, PrimaryKey} from '@directus/shared/types';
+export type {PrimaryKey} from '@directus/shared/types';
+
+export type ID<
+  T extends Record<string | number | symbol, any>,
+  K extends keyof T = 'id'
+> = T[K];
+
+export interface Item {
+  id: string | number;
+}
+
+export type PartialItem<T extends Item> = Partial<T> & Pick<T, 'id'>;
 
 export type LATITUDE = number;
 export type LONGITUDE = number;
