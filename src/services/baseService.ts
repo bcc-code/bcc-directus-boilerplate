@@ -32,8 +32,9 @@ export class BaseService extends ItemsService {
     opts?: MutationOptions | undefined
   ): Promise<PrimaryKey> {
     const updatedKey: PrimaryKey = await super.updateOne(key, data, opts);
-    await this.cache?.delete(this.cacheKey(updatedKey));
-
+    if (this.cache) {
+      await this.cache.delete(this.cacheKey(updatedKey));
+    }
     return updatedKey;
   }
 
@@ -43,13 +44,15 @@ export class BaseService extends ItemsService {
     opts?: MutationOptions
   ): Promise<PrimaryKey[]> {
     const updatedKeys: PrimaryKey[] = await super.updateMany(keys, data, opts);
-    await Promise.all(updatedKeys.map(this.clearFromCache));
+    if (this.cache) {
+      await Promise.all(updatedKeys.map(this.clearFromCache));
+    }
 
     return updatedKeys;
   }
 
   async clearFromCache(activity: Item | PrimaryKey) {
-    await this.cache?.delete(this.cacheKey(primaryKey(activity)));
+    await this.cache.delete(this.cacheKey(primaryKey(activity)));
   }
 
   protected cacheKey(key: PrimaryKey) {
