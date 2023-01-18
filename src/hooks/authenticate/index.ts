@@ -5,11 +5,10 @@ import jwt, {JwtPayload} from 'jsonwebtoken';
 import jwksRsa from 'jwks-rsa';
 
 export default defineHook(({filter}, {env, exceptions}) => {
-  const {InvalidCredentialsException, ServiceUnavailableException} = exceptions;
+  const {InvalidCredentialsException} = exceptions;
 
   function createOpenIdFrontendAuth(provider: string) {
     const userId = env[`AUTH_${provider.toUpperCase()}_FRONTEND_USER_ID`];
-    const roleId = env[`AUTH_${provider.toUpperCase()}_FRONTEND_ROLE_ID`];
 
     const audience = env[`AUTH_${provider.toUpperCase()}_AUDIENCE`];
     const issuer = env[`AUTH_${provider.toUpperCase()}_ISSUER_URL`];
@@ -91,7 +90,7 @@ export default defineHook(({filter}, {env, exceptions}) => {
 
       return Object.assign({}, _accountability, {
         user: userId,
-        role: roleId,
+        role: null,
         meta: {
           personId,
           hasMembership,
