@@ -1,4 +1,4 @@
-import {InvalidTokenException} from 'directus/dist/exceptions';
+import {InvalidTokenException} from 'directus';
 import {Request} from 'express';
 
 export default (req: Request, _res, next) => {

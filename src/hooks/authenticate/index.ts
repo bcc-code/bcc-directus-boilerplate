@@ -30,11 +30,11 @@ export default defineHook(({filter}, {env, exceptions}) => {
       {req}: {req: Request & {token: string}},
       _context
     ) => {
+      if (!req.token) return null;
+
       const decoded = jwt.decode(req.token, {complete: true});
       if (!decoded?.payload) {
-        throw new ServiceUnavailableException("Couldn't verify token.", {
-          service: 'jwt',
-        });
+        return null;
       }
       const payload = decoded?.payload as JwtPayload;
       if (payload?.iss !== issuer) return null;
