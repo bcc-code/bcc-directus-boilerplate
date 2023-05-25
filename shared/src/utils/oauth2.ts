@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 /**
  * OAuth2 client
@@ -11,8 +11,16 @@ export class OAuth2 {
   clientId: string;
   clientSecret: string;
   scope: string;
+  audience?: string;
+  method?: 'BASIC_AUTH' | 'AUTH_BODY';
 
-  constructor(clientId: string, clientSecret: string, scope: string) {
+  constructor(
+    clientId: string,
+    clientSecret: string,
+    scope: string,
+    audience?: string,
+    method?: 'BASIC_AUTH' | 'AUTH_BODY'
+  ) {
     this.accessToken = '';
     this.refreshToken = '';
     this.expiresAt = 0;
@@ -20,6 +28,8 @@ export class OAuth2 {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
     this.scope = scope;
+    this.audience = audience;
+    this.method = method || 'BASIC_AUTH';
   }
 
   get isExpired() {
@@ -42,41 +52,48 @@ export class OAuth2 {
     this.expiresAt = Date.now() + response.expires_in * 1000;
   }
 
-  async requestAccessToken() {
+  private async requestToken(payload: Record<string, string> = {}) {
+    const config: AxiosRequestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    if (this.method === 'BASIC_AUTH') {
+      config.auth = {
+        username: this.clientId,
+        password: this.clientSecret,
+      };
+    } else {
+      payload.client_id = this.clientId;
+      payload.client_secret = this.clientSecret;
+    }
+
     const response = await axios.post(
       `${process.env.BCC_API_URL}/oauth/token`,
-      {
-        grant_type: 'client_credentials',
-        client_id: this.clientId,
-        client_secret: this.clientSecret,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
+      payload,
+      config
     );
 
     this.loadAccessToken(response.data);
   }
 
-  async refreshAccessToken() {
-    const response = await axios.post(
-      `${process.env.BCC_API_URL}/oauth/token`,
-      {
-        grant_type: 'refresh_token',
-        client_id: this.clientId,
-        client_secret: this.clientSecret,
-        refresh_token: this.refreshToken,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+  async requestAccessToken() {
+    const payload: Record<string, string> = {
+      grant_type: 'client_credentials',
+    };
+    if (this.scope) payload.scope = this.scope;
+    if (this.audience) payload.audience = this.audience;
 
-    this.loadAccessToken(response.data);
+    return this.requestToken(payload);
+  }
+
+  async refreshAccessToken() {
+    const payload: Record<string, string> = {
+      grant_type: 'refresh_token',
+      refresh_token: this.refreshToken,
+    };
+    return this.requestToken(payload);
   }
 
   async request(
