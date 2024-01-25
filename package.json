@@ -2,24 +2,23 @@
   "name": "bcc-directus-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "start.js",
   "engines": {
     "node": "18.2.1"
   },
+  "type": "module",
   "scripts": {
-    "start": "directus start",
-    "init": "sh local_init.sh",
+    "start": "node start.js",
+    "init": "op run --env-file=local.env -- sh local_init.sh",
+    "local": "op run --env-file=local.env -- node start.js",
     "build": "tsc",
     "dev": "tsc --watch --sourceMap true",
     "spec": "tsoa spec",
     "postinstall": "tsc --project ./shared/tsconfig.json --rootDir ./shared/src --module ES2015 --outDir ./shared/dist/esm",
     "clean": "rimraf extensions/dtos extensions/endpoints extensions/hooks extensions/services extensions/types",
-    "seed": "rimraf database/seeds/dist && tsc --project database/seeds/tsconfig.json && knex seed:run --esm --env development",
-    "dk-build": "docker exec -it directus-app npm run build",
-    "dk-init": "docker exec -it directus-app /bin/bash /home/node/app/local_init.sh && docker restart directus-app",
-    "dk-snapshot": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema snapshot ./schema.yaml --yes\"",
-    "dk-apply": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus schema apply ./schema.yaml --yes\"",
-    "dk-migrate": "docker exec --workdir /home/node/app directus-app bash -c \"npx directus database migrate:latest\"",
+    "export": "op run --env-file=local.env -- npx directus schema-sync export",
+    "import": "op run --env-file=local.env -- npx directus schema-sync import",
+    "migrate": "op run --env-file=local.env -- npx directus database migrate:latest",
     "lint": "gts lint",
     "fix": "gts fix"
   },
@@ -29,28 +28,23 @@
     "@faker-js/faker": "^7.6.0",
     "@types/express": "^4.17.14",
     "@types/faker": "^6.6.9",
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.19.9",
     "gts": "^3.1.1",
     "tscpaths": "^0.0.9",
-    "typescript": "^4.9.3"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "@bcc-directus-boilerplate/shared": "file:shared",
+    "@directus/extensions": "^0.2.1",
+    "@directus/types": "^11.0.3",
     "@types/fs-extra": "^9.0.13",
-    "directus": "^9.22.4",
-    "jwks-rsa": "^3.0.0",
-    "nodemon": "^2.0.20",
+    "directus": "^10.8.3",
+    "directus-extension-schema-sync": "^1.6.1",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
+    "knex": "^3.1.0",
+    "nodemon": "^2.0.22",
     "pg": "^8.8.0",
     "tsoa": "^4.1.3"
-  },
-  "peerDependencies": {
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "fs-extra": "^11.1.0",
-    "js-yaml": "^4.1.0",
-    "jsonwebtoken": "^8.5.1",
-    "knex": "^2.3.0",
-    "lodash": "^4.17.21",
-    "rimraf": "^3.0.2"
   }
 }

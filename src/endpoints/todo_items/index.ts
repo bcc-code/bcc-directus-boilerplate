@@ -1,7 +1,7 @@
-import {EndpointConfig} from '@directus/shared/types';
-import {AbstractServiceOptions} from 'directus/dist/types';
-import {TodoItemsController} from './TodoItemsController';
-import {TodoItemsService} from '../../services/todoItemsService';
+import { EndpointConfig } from '@directus/extensions';
+import { AbstractServiceOptions } from '@directus/api/types/index';
+import { TodoItemsController } from './TodoItemsController.js';
+import { TodoItemsService } from '../../services/todoItemsService.js';
 
 const registerEndpoint: EndpointConfig = (router, {database, getSchema}) => {
   router.get('/list/:listId', async (req, res) => {

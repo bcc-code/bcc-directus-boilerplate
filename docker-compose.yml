@@ -1,72 +1,24 @@
 version: "3.8"
 
 services:
-  directus-app:
-    image: directus-app
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-      target: base
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /home/node/app/shared
-      - type: bind
-        source: ./src
-        target: /home/node/app/src
-      - type: bind
-        source: ./extensions
-        target: /home/node/app/extensions
-      - ./.env:/home/node/app/.env
-      - ./schema.yaml:/home/node/app/schema.yaml
-    environment:
-      NODE_ENV: development
-    networks:
-      - directus
-    container_name: directus-app
-    depends_on:
-      postgres-db:
-        condition: service_healthy
-    ports:
-      - "8080:8080"
-      - "9229:9229"
-    command:
-      - /bin/sh
-      - -c
-      - ./run_nodemon.sh
-
   postgres-db:
     container_name: postgres-db
     image: postgis/postgis:13-master
     volumes:
-      - ./data/database:/var/lib/postgresql/data
-    networks:
-      - directus
+      - db-data:/var/lib/postgresql/data
     expose:
       - "5432"
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: 'postgres-admin'
-      POSTGRES_PASSWORD: 'password'
-      POSTGRES_DB: 'directus-app'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgrespw'
+      POSTGRES_DB: 'directus'
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 5s
       retries: 5
 
-  pgadmin:
-    container_name: pg-admin
-    image: dpage/pgadmin4
-    restart: always
-    networks:
-      - directus
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "5050:80"
-
-networks:
-  directus:
+volumes: 
+  db-data:

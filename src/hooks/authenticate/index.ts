@@ -1,12 +1,13 @@
-import {Accountability} from '@directus/shared/types';
-import {defineHook} from '@directus/shared/utils';
-import {Request} from 'express';
-import jwt, {JwtPayload} from 'jsonwebtoken';
+import { Accountability } from '@directus/types';
+import { defineHook } from '@directus/extensions';
+import { createError } from '@directus/errors';
+import { Request } from 'express';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import jwksRsa from 'jwks-rsa';
 
-export default defineHook(({filter}, {env, exceptions}) => {
-  const {InvalidCredentialsException} = exceptions;
+const MissingPersonIDError = createError('INVALID_CREDENTIALS' /* InvalidCredentials */, 'Token is missing Person ID.', 401);
 
+export default defineHook(({filter}, {env}) => {
   function createOpenIdFrontendAuth(provider: string) {
     const userId = env[`AUTH_${provider.toUpperCase()}_FRONTEND_USER_ID`];
 
@@ -46,7 +47,7 @@ export default defineHook(({filter}, {env, exceptions}) => {
         payload['https://members.bcc.no/app_metadata'] ?? {};
 
       if (!personId) {
-        throw new InvalidCredentialsException('Missing Person ID');
+        throw new MissingPersonIDError();
       }
 
       /**

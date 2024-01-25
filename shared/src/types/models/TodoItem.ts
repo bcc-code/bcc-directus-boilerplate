@@ -1,6 +1,6 @@
-import {Item} from '@directus/shared/types';
-import {TodoList} from './TodoList';
-import {ID} from '../types';
+import { Item } from '@directus/types';
+import { TodoList } from './TodoList.js';
+import { ID } from '../types.js';
 
 export interface TodoItem extends Item {
   id: string;

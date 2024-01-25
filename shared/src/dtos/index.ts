@@ -1,1 +1,1 @@
-export * from './TodoItemDto';
+export * from './TodoItemDto.js';

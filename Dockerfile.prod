@@ -1,11 +1,13 @@
-FROM node:slim as base
+FROM node:lts as base
 WORKDIR /home/node/app
 
 COPY ./shared ./shared
 COPY ./src ./src
 COPY ./extensions ./extensions
+COPY ./schema-sync ./schema-sync
 
 COPY *.json ./
+COPY start.js ./
 
 RUN npm i
 
@@ -20,7 +22,8 @@ WORKDIR /home/node/app
 
 CMD npm run build
 
-
-FROM build as production
+FROM node:lts-slim as production
+WORKDIR /home/node/app
+COPY --from=build /home/node/app .
 ENV NODE_PATH=./
-CMD npx nodemon node_modules/directus/dist/start.js
+CMD node start.js

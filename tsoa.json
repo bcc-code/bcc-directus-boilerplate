@@ -1,5 +1,5 @@
 {
-  "entryFile": "node_modules/directus/dist/start.js",
+  "entryFile": "start.js",
   "basePath": "src/",
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": [
