@@ -28,6 +28,21 @@ export const syncCustomCollections = {
       }
     },
   },
+	directus_folders: {
+		watch: ['folders'],
+		excludeFields: [],
+		query: {
+			sort: ['parent', 'id'],
+		},
+	},
+	directus_dashboards: {
+		watch: ['dashboards'],
+		excludeFields: ['user_created', 'panels'],
+	},
+	directus_panels: {
+		watch: ['panels'],
+		excludeFields: ['user_created'],
+	},
   // Other tables
   todo_lists: {
     watch: ['todo_lists.items'],

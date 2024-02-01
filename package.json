@@ -39,7 +39,7 @@
     "@directus/types": "^11.0.3",
     "@types/fs-extra": "^9.0.13",
     "directus": "^10.8.3",
-    "directus-extension-schema-sync": "^1.6.1",
+    "directus-extension-schema-sync": "^1.6.2",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
     "knex": "^3.1.0",

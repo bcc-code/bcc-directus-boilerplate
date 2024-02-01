@@ -13,13 +13,6 @@ export const syncDirectusCollections = {
 	directus_roles: {
 		watch: ['roles'],
 	},
-	directus_folders: {
-		watch: ['folders'],
-		excludeFields: [],
-		query: {
-			sort: ['parent', 'id'],
-		},
-	},
 	directus_permissions: {
 		watch: ['permissions', 'collections', 'fields'],
 		excludeFields: ['id'],
@@ -35,14 +28,6 @@ export const syncDirectusCollections = {
 			// always keep these 3 excluded
 			'mv_hash', 'mv_ts', 'mv_locked',
 		],
-	},
-	directus_dashboards: {
-		watch: ['dashboards'],
-		excludeFields: ['user_created', 'panels'],
-	},
-	directus_panels: {
-		watch: ['panels'],
-		excludeFields: ['user_created'],
 	},
 	directus_presets: {
 		watch: ['presets'],
