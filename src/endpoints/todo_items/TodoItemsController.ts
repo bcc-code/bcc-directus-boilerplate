@@ -1,12 +1,12 @@
-import {Query as BaseQuery} from '@directus/shared/types';
-import {Controller, Get, Inject, Path, Route} from 'tsoa';
+import { Query as BaseQuery } from '@directus/types';
+import { Controller, Get, Inject, Path, Route } from 'tsoa';
 import {
   toTodoItemDto,
   TodoItemDto,
   DbTodoItemFields,
 } from '@bcc-directus-boilerplate/shared/dtos';
-import {TodoItem} from '@bcc-directus-boilerplate/shared/types';
-import {TodoItemsService} from '../../services/todoItemsService';
+import { TodoItem } from '@bcc-directus-boilerplate/shared/types';
+import { TodoItemsService } from '../../services/todoItemsService.js';
 
 @Route('todo_items')
 export class TodoItemsController extends Controller {

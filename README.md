@@ -2,16 +2,18 @@
 
 A boilerplate for using Directus with best practices inside BCC.
 
-## Setup locally (useing docker)
+## Setup locally (using docker)
 
 1. Clone the repo
-2. Create `.env` file. You can copy example by `cp env.example .env`
-3. Install dependencies by `npm install`
-4. Need to prepare shared to be used by docker `cd shared && npm run build`
-5. Run services by `docker compose up -d`
-6. When you run application for the first time, run `npm run dk-init`.
+2. (optional) Create a 1Password Vault or get access to one that contains the secrets you need to run this app locally.
+3. Adjust `local.env` file if needed. You can get inspiration from `.env.example`. Add secrets in form of 1Password references.
+4. Install dependencies by `npm install`
+5. Need to prepare `shared` to be used by Directus `cd shared && npm install && npm run build`
+6. Start database with `docker compose up -d`
+7. When you run application for the first time, run `npm run init`.
+8. Run `npm run local` to run locally
 
-Initial admin user is: `admin@example.com | admin`
+Initial admin user is: `admin@example.com | 12345678`.
 
 ## Documentation
 
@@ -36,16 +38,21 @@ There is a problem with `@Query` annotation when query is an object. In that cas
 
 ### Seeding data to database
 
-Command: `npm run seed`
+The command `npm run init` will import test data prefixed with `testdata__` from `schema-sync/data` folder.
 
-Look at example under `database/seeds/src/index.ts`.
+Look at configuration file in `schema-sync/local_config.js`.
 
-Using knex to seed database.
+It syncs `directus_users` table, but only the admin user. This is needed in order to get a Directus instance with an admin user available.
+It syncs `todo_lists` and `todo_items` test tables. These can be removed and replaced with whatever tables are needed.
 
-### RBAC sync
+Documentation for schema-sync extension can be found here <https://github.com/bcc-code/directus-schema-sync>
 
-In the `.env` file, set the RBAC synchronization mode before database initialization to: `RBAC_SYNC_MODE=EXPORT`
+### Testing the Docker container locally
 
-If the database is already initialized, you can set it to: `RBAC_SYNC_MODE=FULL`
+Run `docker build -t test-directus -f Dockerfile.prod .` to build the test image.
 
-Otherwise, you may run into problems initializing the app.
+Copy `.env.example` to `dockertest.env` and change `DB_HOST` to `host.docker.internal`.
+
+Run `docker run -v "%cd%/dockertest.env:/home/node/app/.env" --name directustest -dp 127.0.0.1:8055:8055 test-directus` to run the image.
+
+To cleanup run `docker stop directustest && docker rm directustest && docker image rm test-directus`

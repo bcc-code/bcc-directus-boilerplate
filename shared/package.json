@@ -1,6 +1,7 @@
 {
 	"name": "@bcc-directus-boilerplate/shared",
 	"version": "1.0.0",
+	"type": "module",
 	"description": "Sharable types and utils for BCC Activites",
 	"sideEffects": false,
 	"exports": {

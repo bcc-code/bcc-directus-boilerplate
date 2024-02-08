@@ -2,8 +2,8 @@
 
 echo '=== running nodemon ==='
 
-if [ -e node_modules/directus/dist/start.js ]; then
-  npx nodemon --inspect=0.0.0.0:9229 node_modules/directus/dist/start.js
+if [ -e start.js ]; then
+  npx nodemon --inspect=0.0.0.0:9229 start.js
 else
-  echo "File node_modules/directus/dist/start.js does not exists."
+  echo "File start.js does not exists."
 fi

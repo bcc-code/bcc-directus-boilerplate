@@ -1,4 +1,4 @@
-import {ID} from '../types';
+import { ID } from '../types/index.js';
 
 export function primaryKey<
   T extends Record<string | number | symbol, any>,

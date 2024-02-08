@@ -1,2 +1,2 @@
-export * from './primaryKey';
-export * from './oauth2';
+export * from './primaryKey.js';
+export * from './oauth2.js';
