@@ -6,7 +6,7 @@ const FORBIDDEN_IN_ENV = createError('FORBIDDEN', 'This action is not allowed in
 let _env;
 
 function blockAction(_delta?: any, _meta?: any, context?: { accountability?: any }) {
-    if (!toArray(_env.ACTION_BLOCK_BYPASS_USER_IDS ?? []).includes(context?.accountability?.user))
+    if (context?.accountability !== null && !(context?.accountability?.role == '' && context?.accountability?.admin === true) && !toArray(_env.ACTION_BLOCK_BYPASS_USER_IDS ?? []).includes(context?.accountability?.user))
         throw new FORBIDDEN_IN_ENV();
 }
 
