@@ -51,7 +51,7 @@ Documentation for schema-sync extension can be found here <https://github.com/bc
 
 Run `docker build -t test-directus -f Dockerfile.prod .` to build the test image.
 
-Copy  `.env.example` to `dockertest.env` and change `DB_HOST` to `host.docker.internal`.
+Copy `.env.example` to `dockertest.env` and change `DB_HOST` to `host.docker.internal`.
 
 Run `docker run -v "%cd%/dockertest.env:/home/node/app/.env" --name directustest -dp 127.0.0.1:8055:8055 test-directus` to run the image.
 
