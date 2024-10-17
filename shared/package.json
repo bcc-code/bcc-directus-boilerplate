@@ -26,7 +26,7 @@
 		"!**/*.d.ts.map"
 	],
 	"scripts": {
-		"build": "npm run build:esm && npm run build:cjs",
+		"build": "pnpm run build:esm && pnpm run build:cjs",
 		"build:esm": "tsc --project ./tsconfig.json --module ES2015 --outDir ./dist/esm",
 		"build:cjs": "tsc --project ./tsconfig.json --module CommonJS --outDir ./dist/cjs",
 		"dev": "tsc --watch --project ./tsconfig.json --module ES2015 --outDir ./dist/esm"

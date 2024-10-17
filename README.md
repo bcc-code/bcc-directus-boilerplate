@@ -7,11 +7,11 @@ A boilerplate for using Directus with best practices inside BCC.
 1. Clone the repo
 2. (optional) Create a 1Password Vault or get access to one that contains the secrets you need to run this app locally.
 3. Adjust `local.env` file if needed. You can get inspiration from `.env.example`. Add secrets in form of 1Password references.
-4. Install dependencies by `npm install`
-5. Need to prepare `shared` to be used by Directus `cd shared && npm install && npm run build`
+4. Install dependencies by `pnpm install`. If you don't have PNPM installed, install it from here: <https://pnpm.io/installation>.
+5. Need to prepare `shared` to be used by Directus `cd shared && pnpm install && pnpm run build`
 6. Start database with `docker compose up -d`
-7. When you run application for the first time, run `npm run init`.
-8. Run `npm run local` to run locally
+7. When you run application for the first time, run `pnpm run init`.
+8. Run `pnpm run local` to run locally
 
 Initial admin user is: `admin@example.com | 12345678`.
 
@@ -38,7 +38,7 @@ There is a problem with `@Query` annotation when query is an object. In that cas
 
 ### Seeding data to database
 
-The command `npm run init` will import test data prefixed with `testdata__` from `schema-sync/data` folder.
+The command `pnpm run init` will import test data prefixed with `testdata__` from `schema-sync/data` folder.
 
 Look at configuration file in `schema-sync/local_config.js`.
 

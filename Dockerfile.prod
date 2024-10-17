@@ -7,23 +7,23 @@ COPY ./extensions ./extensions
 COPY ./schema-sync ./schema-sync
 
 COPY *.json ./
-COPY start.js ./
+COPY start.mjs ./
 
-RUN npm i
+RUN pnpm i
 
 FROM base as build-shared
 WORKDIR /home/node/app/shared
 
-CMD npm run build
+CMD pnpm run build
 
 
 FROM build-shared as build
 WORKDIR /home/node/app
 
-CMD npm run build
+CMD pnpm run build
 
 FROM node:lts-slim as production
 WORKDIR /home/node/app
 COPY --from=build /home/node/app .
 ENV NODE_PATH=./
-CMD node start.js
+CMD node start.mjs

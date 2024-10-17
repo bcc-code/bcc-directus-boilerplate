@@ -2,15 +2,16 @@
   "name": "bcc-directus-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "start.js",
+  "main": "start.mjs",
   "engines": {
     "node": "18.2.1"
   },
   "type": "module",
   "scripts": {
-    "start": "node start.js",
-    "init": "op run --env-file=local.env -- sh local_init.sh",
-    "local": "op run --env-file=local.env -- node start.js",
+    "start": "node start.mjs",
+    "bootstrap_start": "npx directus bootstrap && npx directus schema-sync install && node start.mjs",
+    "init": "op run --env-file=local.env -- sh scripts/local_init.sh",
+    "local": "op run --env-file=local.env -- node start.mjs",
     "build": "tsc",
     "dev": "tsc --watch --sourceMap true",
     "spec": "tsoa spec",

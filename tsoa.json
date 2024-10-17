@@ -1,5 +1,5 @@
 {
-  "entryFile": "start.js",
+  "entryFile": "start.mjs",
   "basePath": "src/",
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": [
