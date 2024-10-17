@@ -1,2 +1,2 @@
-export * from './models';
-export * from './types';
+export * from './models/index.js';
+export * from './types.js';

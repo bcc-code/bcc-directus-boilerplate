@@ -1,0 +1,29 @@
+[
+  {
+    "appearance": null,
+    "auth_data": null,
+    "avatar": null,
+    "description": null,
+    "email": "admin@example.com",
+    "email_notifications": true,
+    "external_identifier": null,
+    "first_name": "Admin",
+    "id": "cb7c2df3-7876-4240-944f-e0ecd766d91c",
+    "language": null,
+    "last_name": "User",
+    "location": null,
+    "password": "12345678",
+    "person_id": null,
+    "provider": "default",
+    "role": "f51417b6-97a1-42f5-b212-b5b7d7066d66",
+    "status": "active",
+    "tags": null,
+    "tfa_secret": null,
+    "theme_dark": null,
+    "theme_dark_overrides": null,
+    "theme_light": null,
+    "theme_light_overrides": null,
+    "title": null,
+    "token": null
+  }
+]

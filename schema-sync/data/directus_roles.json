@@ -1,0 +1,12 @@
+[
+  {
+    "admin_access": true,
+    "app_access": true,
+    "description": "$t:admin_description",
+    "enforce_tfa": false,
+    "icon": "verified",
+    "id": "f51417b6-97a1-42f5-b212-b5b7d7066d66",
+    "ip_access": null,
+    "name": "Administrator"
+  }
+]

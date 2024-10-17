@@ -1,4 +1,4 @@
-import {Item} from '@directus/shared/types';
+import { Item } from '@directus/types';
 
 export interface TodoList extends Item {
   id: string;

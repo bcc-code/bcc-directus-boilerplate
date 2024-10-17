@@ -1,4 +1,4 @@
-export type {PrimaryKey} from '@directus/shared/types';
+export type { PrimaryKey } from '@directus/types';
 
 export type ID<
   T extends Record<string | number | symbol, any>,

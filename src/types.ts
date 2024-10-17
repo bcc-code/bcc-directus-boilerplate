@@ -1,4 +1,4 @@
-import {Accountability, Query, SchemaOverview} from '@directus/shared/types';
+import { Accountability, Query, SchemaOverview } from '@directus/types';
 
 declare global {
 // eslint-disable-next-line @typescript-eslint/no-namespace

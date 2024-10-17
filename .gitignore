@@ -8,7 +8,7 @@ node_modules/
 .idea/
 
 #PostgreSQL local files
-data/
+/data/
 
 # SQLite local files
 *.db

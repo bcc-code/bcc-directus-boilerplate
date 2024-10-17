@@ -1,4 +1,4 @@
-import {TodoItem} from '../types';
+import { TodoItem } from '../types/index.js';
 
 export const DbTodoItemFields = [
   'id',

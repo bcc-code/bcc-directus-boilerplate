@@ -1,12 +1,12 @@
-import {Accountability} from '@directus/shared/types';
+import { Accountability } from '@directus/types';
 import {
   AbstractServiceOptions,
   Item,
   MutationOptions,
   PrimaryKey,
-} from 'directus/dist/types';
-import {primaryKey} from '@bcc-directus-boilerplate/shared/utils';
-import {ItemsService} from 'directus';
+} from '@directus/api/types/index';
+import { primaryKey } from '@bcc-directus-boilerplate/shared/utils';
+import { ItemsService } from '@directus/api/services/index';
 
 export class BaseService extends ItemsService {
   constructor(
