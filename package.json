@@ -37,7 +37,7 @@
   "dependencies": {
     "@bcc-directus-boilerplate/shared": "file:shared",
     "@types/fs-extra": "^9.0.13",
-    "directus": "^9.22.4",
+    "directus": "^9.23.1",
     "jwks-rsa": "^3.0.0",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
